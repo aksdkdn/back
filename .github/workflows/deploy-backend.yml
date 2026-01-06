@@ -24,7 +24,7 @@ jobs:
           # 3. 서버에서 실행할 명령어들 (수동으로 하던 것들)
           script: |
             # 폴더 이동
-            cd /home/ubuntu/kakaofast
+            cd /home/ubuntu/back
             
             # 1) 최신 코드 받기
             git pull origin main
