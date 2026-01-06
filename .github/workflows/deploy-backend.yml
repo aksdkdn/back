@@ -1,0 +1,38 @@
+name: Deploy FastAPI to Private Server
+
+on:
+  push:
+    branches: [ main ]  # main 브랜치에 푸시하면 발동
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via Bastion
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          # 1. 징검다리 (Bastion) 설정
+          proxy_host: ${{ secrets.BASTION_HOST }}
+          proxy_username: ${{ secrets.USERNAME }}
+          proxy_key: ${{ secrets.KAKAO_KEY }}
+          
+          # 2. 목적지 (Private Server) 설정
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KAKAO_KEY }}
+          
+          # 3. 서버에서 실행할 명령어들 (수동으로 하던 것들)
+          script: |
+            # 폴더 이동
+            cd /home/ubuntu/kakaofast
+            
+            # 1) 최신 코드 받기
+            git pull origin main
+            
+            # 2) 가상환경 활성화 및 패키지 설치
+            source venv/bin/activate
+            pip install -r requirements.txt
+            
+            # 3) 서버 재시작 (서비스 등록해뒀으므로 한 줄이면 끝!)
+            sudo systemctl restart fastapi
+            
