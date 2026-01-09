@@ -11,7 +11,7 @@ jobs:
       - name: Deploy via Bastion
         uses: appleboy/ssh-action@v1.0.0
         with:
-          # 1. 징검다리 (Bastion) 설정
+          # 1. 징검다리 (Bastion) 설정합시다
           proxy_host: ${{ secrets.BASTION_HOST }}
           proxy_username: ${{ secrets.USERNAME }}
           proxy_key: ${{ secrets.KAKAO_KEY }}
@@ -35,4 +35,3 @@ jobs:
             
             # 3) 서버 재시작 (서비스 등록해뒀으므로 한 줄이면 끝!)
             sudo systemctl restart fastapi
-            

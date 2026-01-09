@@ -18,7 +18,7 @@ app.add_middleware(
 app.include_router(movies.router)
 app.include_router(users.router)
 app.include_router(recommend.router)
-
+# Health check endpoint
 @app.get("/")
 def root():
     return {"ok": True, "service": "movie-recommender"}
