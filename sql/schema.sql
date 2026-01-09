@@ -1,4 +1,4 @@
--- Create DB and tables
+-- Create DB and tablesㅇㅇㅇㅇㅇ
 CREATE DATABASE IF NOT EXISTS moviesdb DEFAULT CHARACTER SET utf8mb4;
 
 USE moviesdb;
